@@ -1,10 +1,13 @@
+// creates a form element
 const formElement = document.querySelector("#form");
+
+// gathers input from form
 const formInput = document.querySelector('input[name="tasks"]');
 
 // make variable to append new list item
 const results = document.querySelector("#results");
 
-// allows us to make a strikethrough
+// allows us to make a strikethrough from the css class
 const finishedTask = document.querySelectorAll("li");
 
 // form delegation for when click on ul
@@ -29,7 +32,6 @@ function populateList(text) {
 
     // make sure return created element
     return listItem;
-    
 }
 
 // click event and annyoumous function for clicking submit
@@ -51,5 +53,9 @@ formElement.addEventListener("submit", function (e) {
     
     // append to the li element
     results.appendChild(removeBtn)
-    
 });
+
+//save tasks to Localstorage but not working as planned
+localStorage.setItem("tasks", JSON.stringify(results));
+JSON.parse(localStorage.getItem("results"));
+
