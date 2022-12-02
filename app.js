@@ -14,8 +14,8 @@ results.addEventListener("click", function (e) {
     };
     
     if (e.target.tagName === "LI") {
-        //e.target.parentElement.strike();
-        e.classList.toggle("completed");
+        //e.target.parentElement.strike(); but classList and toggle dont work
+        finishedTask.classList.toggle("completed");
     };  
 });
 
