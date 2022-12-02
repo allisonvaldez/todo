@@ -53,6 +53,9 @@ formElement.addEventListener("submit", function (e) {
     
     // append to the li element
     results.appendChild(removeBtn)
+
+    //on click event clear the input
+    newListItem.value = "";
 });
 
 //save tasks to Localstorage but not working as planned
