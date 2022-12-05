@@ -10,15 +10,19 @@ const results = document.querySelector("#results");
 // allows us to make a strikethrough from the css class
 const finishedTask = document.querySelectorAll("li");
 
-// form delegation for when click on ul
-results.addEventListener("click", function (e) {
+//create remove button for new submissions
+const removeBtn = document.createElement('button');
+
+// event delegation for when click on ul
+results.addEventListener("click", function(e) {
+
     if (e.target.tagName === "BUTTON") {
+        console.log(e.target);
         e.target.parentElement.remove();
     };
     
     if (e.target.tagName === "LI") {
-        //e.target.parentElement.strike(); but classList and toggle dont work
-        finishedTask.classList.toggle("completed");
+        e.target.classList.toggle("completed");
     };  
 });
 
@@ -29,7 +33,7 @@ function populateList(text) {
 
     // set the text of newly created element from input
     listItem.innerText = text;
-
+    
     // make sure return created element
     return listItem;
 }
@@ -44,21 +48,29 @@ formElement.addEventListener("submit", function (e) {
 
     //appends to the ul element (but why appendChild?)
     results.appendChild(newListItem);
-    
-    //create remove button for new submissions
+
+    //on click event clear the input
+    formInput.value = "";
+
+    /*
+    remove should have been event delegation create remove button for new submissions
+    */
     const removeBtn = document.createElement("button");
 
     // create remove button for li
     removeBtn.innerText = "Remove Task";
     
     // append to the li element
-    results.appendChild(removeBtn)
+    newListItem.appendChild(removeBtn);
 
-    //on click event clear the input
-    newListItem.value = "";
 });
 
 //save tasks to Localstorage but not working as planned
-localStorage.setItem("tasks", JSON.stringify(results));
-JSON.parse(localStorage.getItem("results"));
+function addToStorage(tsk) {
+    tsk = JSON.parse(localStorage.getItem("results") || "[]");
+    const setOfTasks = new Set(tsk);
+    setOfTasks.add(tsk);
+    localStorage.setItem("task", JSON.stringify([...setOfTasks])); 
+}
+
 
